@@ -1,7 +1,7 @@
 import './App.css';
 import AlertExample from './components/AlertExample';
 
-function App() {
+const App = () => {
   return (
     <AlertExample />
   );
