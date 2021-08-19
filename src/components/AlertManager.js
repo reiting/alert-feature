@@ -1,34 +1,32 @@
 import AlertComponent from "./AlertComponent"
 
-let uniqueId =
-  Math.floor(Math.random() * 1000)
 export const initialState = { alerts: [] }
 
 export const reducer = (state, action) => {
   switch (action.type.alertType) {
     case 'error':
-      return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: uniqueId }] }
+      return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: Math.floor(Math.random() * 100) }] }
     case 'warning':
-      return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: uniqueId }] }
+      return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: Math.floor(Math.random() * 100) }] }
     case 'info':
-      return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: uniqueId }] }
+      return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: Math.floor(Math.random() * 100) }] }
     case 'sucess':
-      return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: uniqueId }] }
+      return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: Math.floor(Math.random() * 100) }] }
     default:
   } return state
 }
 
-export const AlertManager = ({state}) => {
+export const AlertManager = ({ state }) => {
   return (
     state.alerts.map(alert => (
-        <AlertComponent
+      <AlertComponent
         key={alert.id}
-          text={alert.text}
-          link={alert.link}
-          alertTitle={alert.alertTitle}
-          alertType={alert.alertType}
-          timeLimit={parseInt(alert.timeLimit)}
-        />
+        text={alert.text}
+        link={alert.link}
+        alertTitle={alert.alertTitle}
+        alertType={alert.alertType}
+        timeLimit={parseInt(alert.timeLimit)}
+      />
     ))
   )
 }
