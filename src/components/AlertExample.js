@@ -6,49 +6,28 @@ const AlertExample = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    console.log('submitted')
+    let timeLimit = e.target.timeLimit.value
+    let text = e.target.text.value
+    let link = e.target.link.value
+    let alertType = e.target.alertType.value.toLowerCase()
+    let alertTitle = e.target.alertTitle.value
+    dispatch({type: {alertType}, action: timeLimit, text, link, alertType, alertTitle })
   }
+
 
   return (
     <form onSubmit={onSubmit}>
-      TimeLimit: <input type='text' value={timeLimit} onChange={(e) =>
-        dispatch({
-          type: 'timeLimit',
-          fieldName: 'timeLimit',
-          payload: e.target.value,
-        })
-      } />
-      Text: <input type='text' value={text} onChange={(e) =>
-        dispatch({
-          type: 'text',
-          fieldName: 'text',
-          payload: e.target.value,
-        })
-      } />
-      Link: <input type='text' value={link} onChange={(e) =>
-        dispatch({
-          type: 'link',
-          fieldName: 'link',
-          payload: e.target.value,
-        })
-      } />
-      Alert Type: <input type='text' value={alertType} onChange={(e) =>
-        dispatch({
-          type: 'alertType',
-          fieldName: 'alertType',
-          payload: e.target.value,
-        })
-      } />
-      Alert Title: <input type='text' value={alertTitle} onChange={(e) =>
-        dispatch({
-          type: 'alertTitle',
-          fieldName: 'alertTitle',
-          payload: e.target.value,
-        })
-      } />
+      TimeLimit: <input type='text' defaultValue={timeLimit} name='timeLimit' />
+      Text: <input type='text' name='text' />
+      Link: <input type='text' name='link' />
+      Alert Type: <input type='text' name='alertType' />
+      Alert Title: <input type='text' name='alertTitle' />
       <input type='submit' value='submit'></input>
     </form>
   )
 }
 
 export default AlertExample
+
+
+
