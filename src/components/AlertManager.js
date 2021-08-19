@@ -1,3 +1,4 @@
+import { useReducer } from "react"
 import AlertComponent from "./AlertComponent"
 
 export const initialState = { alerts: [] }
@@ -12,9 +13,14 @@ export const reducer = (state, action) => {
       return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: Math.floor(Math.random() * 100) }] }
     case 'sucess':
       return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: Math.floor(Math.random() * 100) }] }
+   
     default:
   } return state
 }
+
+export const useAlertReducer = () => {
+  return useReducer(reducer, initialState);
+};
 
 export const AlertManager = ({ state }) => {
   return (
