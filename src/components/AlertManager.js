@@ -1,14 +1,10 @@
-import { useReducer } from "react"
 import AlertComponent from "./AlertComponent"
 
 let uniqueId =
   Math.floor(Math.random() * 1000)
-
 export const initialState = { alerts: [] }
 
 export const reducer = (state, action) => {
-
-  console.log('state', state)
   switch (action.type.alertType) {
     case 'error':
       return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: uniqueId }] }
@@ -22,24 +18,19 @@ export const reducer = (state, action) => {
   } return state
 }
 
-// export const useAlertReducer = () => {
-//   return useReducer(reducer, initialState);
-// };
-
-export const AlertManager = () => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+export const AlertManager = ({state}) => {
   return (
-    Object.keys(state).map(alert => (
-      <AlertComponent
-        text={alert.text}
-        link={alert.link}
-        alertTitle={alert.alertTitle}
-        alertType={alert.alertType}
-        dispatch={dispatch}
-      />
+    state.alerts.map(alert => (
+        <AlertComponent
+        key={alert.id}
+          text={alert.text}
+          link={alert.link}
+          alertTitle={alert.alertTitle}
+          alertType={alert.alertType}
+          timeLimit={parseInt(alert.timeLimit)}
+        />
     ))
   )
-
 }
 
 

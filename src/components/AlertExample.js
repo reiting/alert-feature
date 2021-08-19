@@ -1,9 +1,5 @@
-import { initialState, reducer, useAlertReducer } from "./AlertManager";
-import { useReducer } from "react"
 
-
-const AlertExample = ({ setSubmitted }) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+const AlertExample = ({ setSubmitted, dispatch }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     let timeLimit = e.target.time.value
@@ -17,13 +13,12 @@ const AlertExample = ({ setSubmitted }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      TimeLimit: <input type='text' name='time' />
-      Text: <input type='text' name='text' />
-      Link: <input type='text' name='link' />
-      Alert Type: <input type='text' name='alertType' />
-      Alert Title: <input type='text' name='alertTitle' />
+      TimeLimit: <input type='number' name='time' /> <br/>
+      Text: <input type='text' name='text' /> <br/>
+      Link: <input type='text' name='link' /> <br/>
+      Alert Type: <input type='text' name='alertType' /> <br/>
+      Alert Title: <input type='text' name='alertTitle' /> <br/>
       <input type='submit' value='submit'></input>
-      <button onClick={() => console.log('state', state)}>console</button>
     </form>
   )
 }
