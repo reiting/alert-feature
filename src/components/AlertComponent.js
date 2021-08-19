@@ -8,9 +8,9 @@ const AlertComponent = ({ text, link, alertTitle, alertType, timeLimit }) => {
 
   useEffect(
     () => {
-      let timer1 = setTimeout(() => setShow(false), timeLimit * 1000);
+      let timer = setTimeout(() => setShow(false), timeLimit * 1000 || 10000);
       return () => {
-        clearTimeout(timer1);
+        clearTimeout(timer);
       };
     }, [timeLimit])
   return (
