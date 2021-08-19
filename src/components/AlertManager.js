@@ -4,64 +4,38 @@ import AlertComponent from "./AlertComponent"
 let uniqueId =
   Math.floor(Math.random() * 1000)
 
-const initialState = {
-  timeLimit: '10000',
-  text: '',
-  link: '',
-  alertType: '',
-  alertTitle: ''
-}
+export const initialState = { alerts: [] }
 
-// const reducer = (state, action) => {
-//   switch (action.type) {
-//     case 'timeLimit':
-//       return { ...state, }
-//     case 'text':
-//       return { ...state, }
-//     case 'link':
-//       return { ...state }
-//     case 'alertType':
-//       return { ...state }
-//     case 'alertTitle':
-//       return { ...state }
-//     default:
-//       return state
-//   }
-// }
+export const reducer = (state, action) => {
 
-const reducer = (state, action) => {
-  console.log('actionnnnnnnn', action)
+  console.log('state', state)
   switch (action.type.alertType) {
     case 'error':
-      console.log('made it in error')
-      return { ...state, id: uniqueId}
+      return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: uniqueId }] }
     case 'warning':
-      return { ...state, id: uniqueId}
+      return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: uniqueId }] }
     case 'info':
-      return { ...state, id: uniqueId}
+      return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: uniqueId }] }
     case 'sucess':
-      return { ...state, id: uniqueId}
+      return { ...state, alerts: [...state.alerts, { timeLimit: action.payload.timeLimit, text: action.payload.text, link: action.payload.link, alertType: action.payload.alertType, alertTitle: action.payload.alertTitle, id: uniqueId }] }
     default:
-      return state
-  }
+  } return state
 }
 
-export const useAlertReducer = () => {
-  return useReducer(reducer, initialState);
-};
+// export const useAlertReducer = () => {
+//   return useReducer(reducer, initialState);
+// };
 
 export const AlertManager = () => {
-  const [state, dispatch] = useAlertReducer()
-  console.log('stattteeeeeee', state)
+  const [state, dispatch] = useReducer(reducer, initialState)
   return (
-      <h1>TITLE</h1>,
-
     Object.keys(state).map(alert => (
       <AlertComponent
         text={alert.text}
         link={alert.link}
         alertTitle={alert.alertTitle}
         alertType={alert.alertType}
+        dispatch={dispatch}
       />
     ))
   )

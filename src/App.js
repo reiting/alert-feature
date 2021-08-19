@@ -1,9 +1,16 @@
+import { useState } from 'react';
 import './App.css';
 import AlertExample from './components/AlertExample';
+import { AlertManager, useAlertReducer } from './components/AlertManager';
 
 const App = () => {
+  const [submitted, setSubmitted] = useState(false)
   return (
-    <AlertExample />
+    <div>
+      <AlertExample setSubmitted={setSubmitted} />
+      <AlertManager />
+    </div>
+
   );
 }
 

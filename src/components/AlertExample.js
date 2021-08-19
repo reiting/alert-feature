@@ -1,33 +1,31 @@
-import { useAlertReducer } from "./AlertManager";
+import { initialState, reducer, useAlertReducer } from "./AlertManager";
+import { useReducer } from "react"
 
-const AlertExample = () => {
-  const [state, dispatch] = useAlertReducer()
-  const { timeLimit, text, link, alertType, alertTitle } = state
 
-  const onSubmit = (e) => {
+const AlertExample = ({ setSubmitted }) => {
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const handleSubmit = (e) => {
     e.preventDefault()
-    let timeLimit = e.target.timeLimit.value
+    let timeLimit = e.target.time.value
     let text = e.target.text.value
     let link = e.target.link.value
     let alertType = e.target.alertType.value.toLowerCase()
     let alertTitle = e.target.alertTitle.value
-    dispatch({type: {alertType}, action: timeLimit, text, link, alertType, alertTitle })
+    dispatch({ type: { alertType }, payload: { timeLimit, text, link, alertType, alertTitle }, })
+    setSubmitted(true)
   }
 
-
   return (
-    <form onSubmit={onSubmit}>
-      TimeLimit: <input type='text' defaultValue={timeLimit} name='timeLimit' />
+    <form onSubmit={handleSubmit}>
+      TimeLimit: <input type='text' name='time' />
       Text: <input type='text' name='text' />
       Link: <input type='text' name='link' />
       Alert Type: <input type='text' name='alertType' />
       Alert Title: <input type='text' name='alertTitle' />
       <input type='submit' value='submit'></input>
+      <button onClick={() => console.log('state', state)}>console</button>
     </form>
   )
 }
 
 export default AlertExample
-
-
-

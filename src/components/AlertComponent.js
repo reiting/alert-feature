@@ -4,11 +4,14 @@ import AlertTitle from '@material-ui/lab/AlertTitle';
 const AlertComponent = ({ text, link, alertTitle, alertType }) => {
   return (
     <div>
+      <h1>HELLLLPPPPP</h1>
       {alertType === 'error' ? (
+        <a href={link}>
         <Alert variant='outlined' severity='error'>
           <AlertTitle>{alertTitle}</AlertTitle>
           {text}
         </Alert>
+        </a>
       )
         : alertType === 'warning' ? (
           <Alert variant='outlined' severity='warning'>
